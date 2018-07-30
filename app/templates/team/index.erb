@@ -1,0 +1,9 @@
+<% users = Terminal::Table.new do |t| %>
+  <% t.title = "Team" %>
+  <% t.headings = ['id', 'username', 'password'] %>
+  <% @user.each do |user| %>
+    <% t.add_row [user.id, user.username, user.password] %>
+  <% end %>
+<% end %>
+
+<%= users %>
