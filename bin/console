@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+
+require_relative '../config/initializers/environment'
+
+require_relative '../app/models/user'
+
+require 'irb'
+IRB.start

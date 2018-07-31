@@ -1,4 +1,4 @@
-require_relative '../application'
+require_relative 'application'
 require_relative 'flag'
 require_relative 'team'
 require_relative 'session'

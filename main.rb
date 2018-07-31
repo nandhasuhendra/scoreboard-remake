@@ -1,8 +1,8 @@
 #!/usr/bin/env ruby
-require_relative '../config/initializers/environment'
-require_relative '../config/route'
-require_relative '../app/libs/routing'
-require_relative '../app/controllers/authentication'
+require_relative './config/initializers/environment'
+require_relative './config/route'
+require_relative './app/libs/routing'
+require_relative './app/controllers/authentication'
 
 begin
   Libs::Routing.params({})

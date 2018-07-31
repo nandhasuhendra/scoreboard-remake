@@ -15,13 +15,13 @@ class Authentication < Application
     print 'Password : '
     params[:password] = gets.chomp
 
-    user = User.where(username: params[:username]).where(password: params[:password]).first
-    
-    if user
-      set_session(params)
+    user = User.find_by_username(params[:username])
+
+    if user and check_password(user, params)
+      set_session(user)
 
       Libs::Routing.params({})
-      Libs::Routing.dispatch('home', is_admin?(user))
+      Libs::Routing.dispatch('home', ((user.is_admin) ? 'admin' : 'team'))
     else
       puts 'Failed'
 
@@ -30,5 +30,9 @@ class Authentication < Application
       Libs::Routing.params({})
       Libs::Routing.dispatch('login')
     end
+  end
+
+  def check_password(user, params)
+    BCrypt::Password.new(user.password) == params[:password]
   end
 end

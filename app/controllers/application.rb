@@ -9,10 +9,6 @@ class Application
     @@sessions = sessions
   end
 
-  def is_admin?(params)
-    params.is_admin ? 'admin' : 'team'
-  end
-
   def readline
     commands = %w(help logout)
     commands = commands.concat(@command_completion ||= [])
