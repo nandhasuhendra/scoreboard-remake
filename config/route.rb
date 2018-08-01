@@ -13,9 +13,10 @@ module Config
     'category/update' => 'CategoryController#update',
     'category/delete' => 'CategoryController#delete',
 
-    'team'            => 'TeamController#index',
-    'team/register'   => 'TeamController#create',
-    'team/update'     => 'TeamController#update',
-    'team/delete'     => "TeamController#delete"
+    'team'                => 'TeamController#index',
+    'team/register'       => 'TeamController#create',
+    'team/update'         => 'TeamController#update',
+    'team/delete'         => 'TeamController#delete',
+    'team/batch-register' => 'TeamController#batch_insert'
   }
 end

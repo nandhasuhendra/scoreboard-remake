@@ -14,4 +14,12 @@ class User < ActiveRecord::Base
   # def password=(new_password)
   #   write_attribute(:password, Password.create(new_password))
   # end
+  #
+  def self.first_or_create(params = {})
+    find = where(username: params[:username]).first
+
+    return find unless find.nil?
+
+    create(params)
+  end
 end

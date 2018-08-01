@@ -23,6 +23,7 @@ module Admin
       team/register
       team/update
       team/delete
+      team/batch-register
       )
       @command_completion = @allowed_command
     end
