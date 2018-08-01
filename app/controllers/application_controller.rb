@@ -1,4 +1,4 @@
-class Application
+class ApplicationController
   def set_params(params = {})
     fail 'Parameter is not hash' if !params.is_a?(Hash) and params != {}
 

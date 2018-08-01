@@ -1,11 +1,11 @@
-require_relative '../application'
-require_relative 'flag'
-require_relative 'session'
-require_relative 'challenge'
-require_relative 'scoreboard'
+require_relative '../application_controller'
+require_relative 'flag_controller'
+require_relative 'session_controller'
+require_relative 'challenge_controller'
+require_relative 'scoreboard_controller'
 
 module Team
-  class Home < Application
+  class HomeController < ApplicationController
     def initialize
       @allowed_command = %w(challenge scoreboard flag)
       @command_completion = @allowed_command

@@ -1,7 +1,7 @@
 <% tables = Terminal::Table.new do |table| %>
-  <% table.headings = ['Id', 'Username', 'Password'] %>
-  <% @user.each do |user| %>
-    <% table.add_row [user.id, user.username, user.password_digest] %>
+  <% table.headings = ['Id', 'Username', 'Password', 'Admin', 'Created at', 'Updated at'] %>
+  <% @resources.each do |user| %>
+    <% table.add_row [user.id, user.username, user.password_digest, user.is_admin, user.created_at, user.updated_at] %>
   <% end %>
 <% end %>
 

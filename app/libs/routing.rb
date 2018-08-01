@@ -22,6 +22,7 @@ module Libs
         # kelas.send(:set_params, @params)
         kelas.send(route[:method])
       rescue Exception => e
+        puts e
         puts 'Route not found : %s' % [to]
       end
     end

@@ -2,7 +2,7 @@
 require_relative './config/initializers/environment'
 require_relative './config/route'
 require_relative './app/libs/routing'
-require_relative './app/controllers/authentication'
+require_relative './app/controllers/authentication_controller'
 
 begin
   # Libs::Routing.params({})

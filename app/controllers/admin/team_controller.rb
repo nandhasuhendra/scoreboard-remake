@@ -1,10 +1,10 @@
-require_relative 'application'
+require_relative 'application_controller'
 require_relative '../../models/user'
 
 module Admin
-  class Team < Application
+  class TeamController < ApplicationController
     def index
-      @user = User.all
+      @resources = User.all
 
       render("team/index.erb")
     end
@@ -19,8 +19,8 @@ module Admin
       print 'Password Confirmation : '
       @confirm = gets.chomp
 
-      @user = User.new(username: @username, password: @password, password_confirmation: @confirm)
-      if @user.save
+      @resource = User.new(username: @username, password: @password, password_confirmation: @confirm)
+      if @resource.save
         render("team/create.erb")
       else
         render("shared/error.erb")
@@ -31,7 +31,7 @@ module Admin
       print "Insert username for update : "
       @username = gets.chomp
 
-      @user = User.find_by_username(@username)
+      @resource = User.find_by_username(@username)
 
       print "New Username          : "
       @username = gets.chomp
@@ -42,7 +42,7 @@ module Admin
       print "Password Confirmation : "
       @confirm = gets.chomp
 
-      if @user.update(username: @username, password: @password, password_confirmation: @confirm)
+      if @resource.update(username: @username, password: @password, password_confirmation: @confirm)
         render("team/edit.erb")
       else
         render("shared/error.erb")
@@ -53,9 +53,9 @@ module Admin
       print "Delete username : "
       @username = gets.chomp
 
-      @user = User.find_by_username(@username)
-      unless @user.blank?
-        @user.destroy
+      @resource = User.find_by_username(@username)
+      unless @resource.blank?
+        @resource.destroy
 
         puts "Username is deleted"
       else

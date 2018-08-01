@@ -1,9 +1,9 @@
-require_relative "application"
-require_relative "admin/home"
-require_relative "team/home"
+require_relative "application_controller"
+require_relative "admin/home_controller"
+require_relative "team/home_controller"
 require_relative "../models/user"
 
-class Authentication < Application
+class AuthenticationController < ApplicationController
   def login
     puts File.read(Dir.pwd + '/banner.txt')
 

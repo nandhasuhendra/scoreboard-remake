@@ -1,8 +1,8 @@
-require_relative '../application'
+require_relative '../application_controller'
 require_relative '../../models/user'
 
 module Admin
-  class Application < Application
+  class ApplicationController < ApplicationController
     def initialize
       is_not_admin?
     end
