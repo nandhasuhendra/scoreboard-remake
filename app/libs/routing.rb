@@ -4,9 +4,9 @@ module Libs
   class Routing
     include Config
 
-    def self.params(params = {})
-      @params = params
-    end
+    # def self.params(params = {})
+    #   @params = params
+    # end
 
     def self.dispatch(to, group = '')
       begin
@@ -19,7 +19,7 @@ module Libs
 
         kelas = "#{route[:class]}".constantize
         kelas = kelas.send(:new)
-        kelas.send(:set_params, @params)
+        # kelas.send(:set_params, @params)
         kelas.send(route[:method])
       rescue Exception => e
         puts 'Route not found : %s' % [to]

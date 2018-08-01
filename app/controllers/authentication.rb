@@ -17,22 +17,22 @@ class Authentication < Application
 
     user = User.find_by_username(params[:username])
 
-    if user and check_password(user, params)
+    if user and user.authenticate(params[:password])
       set_session(user)
 
-      Libs::Routing.params({})
+      # Libs::Routing.params({})
       Libs::Routing.dispatch('home', ((user.is_admin) ? 'admin' : 'team'))
     else
       puts 'Failed'
 
       sleep 2
 
-      Libs::Routing.params({})
+      # Libs::Routing.params({})
       Libs::Routing.dispatch('login')
     end
   end
 
-  def check_password(user, params)
-    BCrypt::Password.new(user.password) == params[:password]
-  end
+  # def check_password(user, params)
+  #   BCrypt::Password.new(user.password) == params[:password]
+  # end
 end

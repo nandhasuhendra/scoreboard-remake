@@ -1,16 +1,16 @@
 module Config
   ROUTES = {
-    'login'      => 'Authentication#login',
-    'logout'     => 'Session#logout',
-    'home'       => 'Home#menu',
+    'login'           => 'Authentication#login',
+    'logout'          => 'Session#logout',
+    'home'            => 'Home#menu',
 
-    'flag'       => 'Flag#submit',
-    'scoreboard' => 'Scoreboard#show',
-    'challenge'  => 'Challenge#show',
+    'flag/all'        => 'Flag#submit',
+    'scoreboard/all'  => 'Scoreboard#show',
+    'challenge/all'   => 'Challenge#show',
 
-    'team'       => 'Team#index',
-    'register'   => 'Team#create',
-    'profile'    => 'Team#edit',
-    'delete'     => "Team#delete"
+    'team/all'        => 'Team#index',
+    'team/register'   => 'Team#create',
+    'team/update'     => 'Team#update',
+    'team/delete'     => "Team#delete"
   }
 end

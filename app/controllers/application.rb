@@ -36,7 +36,7 @@ class Application
   end
 
   def render(template)
-    ERB.new(File.read(Dir.pwd + "/app/templates/" + template)).result(binding)
+    puts ERB.new(File.read(Dir.pwd + "/app/templates/" + template)).result(binding).strip
   end
 
   def check_allowed_command(input, commands)

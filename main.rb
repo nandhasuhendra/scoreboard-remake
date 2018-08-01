@@ -5,7 +5,7 @@ require_relative './app/libs/routing'
 require_relative './app/controllers/authentication'
 
 begin
-  Libs::Routing.params({})
+  # Libs::Routing.params({})
   Libs::Routing.dispatch('login')
 rescue SignalException => e
   exit
