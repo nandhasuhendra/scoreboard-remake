@@ -1,0 +1,8 @@
+<% tables = Terminal::Table.new do |table| %>
+  <% table.headings = ['Id', 'Name', 'Description', 'Score', 'Real Flag', 'Token', 'Created at', 'Updated at'] %>
+  <% @resources.each do |resource| %>
+    <% table.add_row [resource.id, resource.name, resource.description, resource.score, resource.real_flag, resource.token, resource.created_at, resource.updated_at] %>
+  <% end %>
+<% end %>
+
+<%= tables %>

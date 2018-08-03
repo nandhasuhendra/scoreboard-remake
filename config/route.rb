@@ -4,9 +4,18 @@ module Config
     'logout'          => 'SessionController#logout',
     'home'            => 'HomeController#menu',
 
-    'flag'            => 'FlagController#submit',
-    'scoreboard'      => 'ScoreboardController#show',
-    'challenge'       => 'ChallengeController#show',
+    'flag'                => 'FlagController#submit',
+    'flag/new'            => 'FlagController#create',
+    'flag/update'         => 'FlagController#update',
+    'flag/delete'         => 'FlagController#delete',
+    'flag/batch-generate' => 'FlagController#batch_insert',
+
+    'scoreboard'      => 'ScoreboardController#index',
+
+    'challenge'        => 'ChallengeController#index',
+    'challenge/new'    => 'ChallengeController#create',
+    'challenge/update' => 'ChallengeController#update',
+    'challenge/delete' => 'ChallengeController#delete',
 
     'category'        => 'CategoryController#index',
     'category/new'    => 'CategoryController#create',

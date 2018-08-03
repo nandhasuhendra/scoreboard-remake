@@ -1,5 +1,6 @@
 require_relative 'application_controller'
 require_relative '../../models/user'
+require_relative '../../helpers/application'
 
 module Admin
   class TeamController < ApplicationController
@@ -10,7 +11,7 @@ module Admin
     def index
       @resources = User.all
 
-      render("team/index.erb")
+      render("admin/team/index")
     end
 
     def create
@@ -23,11 +24,11 @@ module Admin
       print 'Password Confirmation : '
       @confirm = gets.chomp
 
-      @resource = User.new(username: @username, password: @password, password_confirmation: @confirm)
+      @resource = User.new(username: @username, password: @password, password_confirmation: @confirm, token: Application.generate_token)
       if @resource.save
-        render("team/create.erb")
+        render("admin/team/create")
       else
-        render("shared/error.erb")
+        render("shared/error")
       end
     end
 
@@ -35,11 +36,12 @@ module Admin
       print "Insert username for update : "
       @username = gets.chomp
 
-      @resource = User.find_by_username(@username)
+      return puts "User is not registered." unless @resource = User.find_by_username(@username)
 
       print "New Username          : "
       @username = gets.chomp
 
+      puts "Keep it blank if you no want to change the password."
       print "New Password          : "
       @password = gets.chomp
 
@@ -47,9 +49,9 @@ module Admin
       @confirm = gets.chomp
 
       if @resource.update(username: @username, password: @password, password_confirmation: @confirm)
-        render("team/edit.erb")
+        render("admin/team/edit")
       else
-        render("shared/error.erb")
+        render("shared/error")
       end
     end
 
@@ -57,7 +59,8 @@ module Admin
       print "Delete username : "
       @username = gets.chomp
 
-      @resource = User.find_by_username(@username)
+      return puts "User is not registered." unless @resource = User.find_by_username(@username)
+
       unless @resource.blank?
         @resource.destroy
 
@@ -82,14 +85,15 @@ module Admin
         data = {
           username: team,
           password: password,
-          password_confirmation: password
+          password_confirmation: password,
+          token: Application.generate_token
         }
 
-        team = User.first_or_create(data)
+        @resources = User.first_or_create(data)
         
-        render("shared/error.erb") unless team.errors.blank?
+        render("shared/error") unless @resources.errors.blank?
 
-        file.write "%s,%s\n" % [data[:username], data[:password]]
+        file.write "Username : %s => password : %s\n" % [data[:username], data[:password]]
 
         puts 'Register Team : %s with password : %s | Success' % [data[:username], data[:password]]
       end

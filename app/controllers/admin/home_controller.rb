@@ -10,9 +10,18 @@ module Admin
   class HomeController < ApplicationController
     def initialize
       @allowed_command = %w(
-      challenge
-      scoreboard
       flag
+      flag/new
+      flag/update
+      flag/delete
+      flag/batch-generate
+
+      scoreboard
+
+      challenge
+      challenge/new
+      challenge/update
+      challenge/delete
 
       category
       category/new

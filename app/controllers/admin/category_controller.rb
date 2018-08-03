@@ -6,7 +6,7 @@ module Admin
     def index
       @resources = Category.all
 
-      render("category/index.erb")
+      render("admin/category/index")
     end
 
     def create
@@ -15,9 +15,9 @@ module Admin
 
       @resource = Category.new(category: @category)
       if @resource.save
-        render("category/create.erb")
+        render("admin/category/create")
       else
-        render("shared/error.erb")
+        render("shared/error")
       end
     end
 
@@ -25,15 +25,15 @@ module Admin
       print "Insert category for update : "
       @category = gets.chomp
 
-      @resource = Category.find_by(category: @category)
+      return puts "Category is not added." unless @resource = Category.find_by(category: @category)
 
       print "New category          : "
       @category = gets.chomp
 
       if @resource.update(category: @category)
-        render("category/edit.erb")
+        render("admin/category/edit")
       else
-        render("shared/error.erb")
+        render("shared/error")
       end
     end
 
@@ -41,7 +41,8 @@ module Admin
       print "Delete category : "
       @category = gets.chomp
 
-      @resource = Category.find_by(category: @category)
+      return puts "Category is not added." unless @resource = Category.find_by(category: @category)
+
       unless @resource.blank?
         @resource.destroy
 
