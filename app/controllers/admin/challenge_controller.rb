@@ -11,21 +11,23 @@ module Admin
     end
 
     def create
+      print 'Category ID           : '
+      category = gets.chomp
+
       print 'Challenge Name        : '
-      @challenge = gets.chomp
+      challenge = gets.chomp
 
       print 'Description           : '
-      @description = gets.chomp
+      description = gets.chomp
 
       print 'Score                 : '
-      @score = gets.chomp
+      score = gets.chomp
 
       puts "Insert the real flag if you want to use the auto-generate flag"
       print 'Real FLag              : '
-      @real_flag = gets.chomp
+      real_flag = gets.chomp
 
-      @resource = Challenge.new(name: @challenge, description: @description, score: @score, real_flag: @real_flag, token: Application.generate_token)
-      if @resource.save
+      if @resource = Challenge.create(name: challenge, description: description, real_flag: real_flag, token: ApplicationController.generate_token, score: score, category_id: category)
         render("admin/challenge/create")
       else
         render("shared/error")
@@ -33,25 +35,28 @@ module Admin
     end
 
     def update
-      print "Insert challenge for update : "
-      @challenge = gets.chomp
+      print "Insert challenge id for update : "
+      id = gets.chomp
 
-      return puts "Challenge is not added." unless @resource = Challenge.find_by_name(@challenge)
+      return puts "Challenge is not added." unless @resource = Challenge.find_by_id(id)
+
+      print 'Category ID                : '
+      category = gets.chomp
 
       print "Challenge name             : "
-      @challenge = gets.chomp
+      challenge = gets.chomp
 
       print "Description                : "
-      @description = gets.chomp
+      description = gets.chomp
 
       print "Score                      : "
-      @score = gets.chomp
+      score = gets.chomp
 
       puts "Re-Insert the real flag if you want to use the auto-generate flag"
       print "Real Flag                  : "
-      @real_flag = gets.chomp
+      real_flag = gets.chomp
 
-      if @resource.update(name: @challenge, description: @description, score: @score, real_flag: @real_flag)
+      if @resource = Challenge.update(name: challenge, description: description, real_flag: real_flag, score: score, category_id: category)
         render("admin/challenge/edit")
       else
         render("shared/error")
@@ -59,10 +64,10 @@ module Admin
     end
 
     def delete
-      print "Delete challenge : "
-      @challenge = gets.chomp
+      print "Select challenge id for delete : "
+      id = gets.chomp
 
-      return puts "Challenge is not added." unless @resource = Challenge.find_by_name(@challenge)
+      return puts "Challenge is not added." unless @resource = Challenge.find_by_id(id)
     
       unless @resource.blank?
         @resource.destroy

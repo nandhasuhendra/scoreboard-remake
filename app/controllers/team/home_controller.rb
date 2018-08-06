@@ -13,7 +13,7 @@ module Team
 
     def menu
       while line = readline
-        Libs::Routing.params({})
+        # Libs::Routing.params({})
         Libs::Routing.dispatch(line, 'team')
       end
     end

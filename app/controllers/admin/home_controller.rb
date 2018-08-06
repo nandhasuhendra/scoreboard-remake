@@ -14,7 +14,9 @@ module Admin
       flag/new
       flag/update
       flag/delete
-      flag/batch-generate
+      flag/batch-flag
+      flag/auto-generate
+      flag/submit
 
       scoreboard
 

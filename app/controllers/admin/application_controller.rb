@@ -10,7 +10,7 @@ module Admin
     protected
       def is_not_admin?
         unless @@sessions.is_admin?
-          Libs::Routing.params({})
+          # Libs::Routing.params({})
           Libs::Routing.dispatch('logout')
         end
       end

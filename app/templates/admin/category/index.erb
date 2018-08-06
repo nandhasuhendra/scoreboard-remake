@@ -1,7 +1,7 @@
 <% tables = Terminal::Table.new do |table| %>
   <% table.headings = ['Id', 'Category', 'Created at', 'Updated at'] %>
-  <% @resources.each do |category| %>
-    <% table.add_row [category.id, category.category, category.created_at, category.updated_at] %>
+  <% @resources.each do |resource| %>
+    <% table.add_row [resource.id, resource.category, resource.created_at, resource.updated_at] %>
   <% end %>
 <% end %>
 

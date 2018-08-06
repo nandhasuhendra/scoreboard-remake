@@ -13,8 +13,7 @@ module Admin
       print "Category name : "
       @category = gets.chomp
 
-      @resource = Category.new(category: @category)
-      if @resource.save
+      if @resource = Category.create(category: @category)
         render("admin/category/create")
       else
         render("shared/error")
@@ -22,15 +21,15 @@ module Admin
     end
 
     def update
-      print "Insert category for update : "
-      @category = gets.chomp
+      print "Select category id for update : "
+      id = gets.chomp
 
-      return puts "Category is not added." unless @resource = Category.find_by(category: @category)
+      return puts "Category is not added." unless @resource = Category.find_id(id: id)
 
-      print "New category          : "
-      @category = gets.chomp
+      print "New category                  : "
+      category = gets.chomp
 
-      if @resource.update(category: @category)
+      if @resource.update(category: category)
         render("admin/category/edit")
       else
         render("shared/error")
@@ -38,10 +37,10 @@ module Admin
     end
 
     def delete
-      print "Delete category : "
-      @category = gets.chomp
+      print "Select category id for delete : "
+      id = gets.chomp
 
-      return puts "Category is not added." unless @resource = Category.find_by(category: @category)
+      return puts "Category is not added." unless @resource = Category.find_by_id(id: id)
 
       unless @resource.blank?
         @resource.destroy
@@ -50,10 +49,6 @@ module Admin
       else
         puts "Category is not ready"
       end
-    end
-
-    private
-    def category_params
     end
   end
 end

@@ -4,11 +4,13 @@ module Config
     'logout'          => 'SessionController#logout',
     'home'            => 'HomeController#menu',
 
-    'flag'                => 'FlagController#submit',
+    'flag'                => 'FlagController#index',
     'flag/new'            => 'FlagController#create',
     'flag/update'         => 'FlagController#update',
     'flag/delete'         => 'FlagController#delete',
-    'flag/batch-generate' => 'FlagController#batch_insert',
+    'flag/batch-flag'     => 'FlagController#batch_flag',
+    'flag/auto-generate'  => 'FlagController#auto_generate',
+    'flag/submit'         => 'FlagController#submit',
 
     'scoreboard'      => 'ScoreboardController#index',
 

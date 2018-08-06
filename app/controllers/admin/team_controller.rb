@@ -16,16 +16,15 @@ module Admin
 
     def create
       print 'Username              : '
-      @username = gets.chomp
+      username = gets.chomp
 
       print 'Password              : '
-      @password = gets.chomp
+      password = gets.chomp
 
       print 'Password Confirmation : '
-      @confirm = gets.chomp
+      confirm = gets.chomp
 
-      @resource = User.new(username: @username, password: @password, password_confirmation: @confirm, token: Application.generate_token)
-      if @resource.save
+      if @resource = User.create(username: username, password: password, password_confirmation: confirm, token: Application.generate_token)
         render("admin/team/create")
       else
         render("shared/error")
@@ -33,22 +32,22 @@ module Admin
     end
 
     def update
-      print "Insert username for update : "
-      @username = gets.chomp
+      print "Select username id for update : "
+      id = gets.chomp
 
-      return puts "User is not registered." unless @resource = User.find_by_username(@username)
+      return puts "User is not registered." unless @resource = User.find_by_id(id)
 
       print "New Username          : "
-      @username = gets.chomp
+      username = gets.chomp
 
       puts "Keep it blank if you no want to change the password."
       print "New Password          : "
-      @password = gets.chomp
+      password = gets.chomp
 
       print "Password Confirmation : "
-      @confirm = gets.chomp
+      confirm = gets.chomp
 
-      if @resource.update(username: @username, password: @password, password_confirmation: @confirm)
+      if @resource.update(username: username, password: password, password_confirmation: confirm)
         render("admin/team/edit")
       else
         render("shared/error")
@@ -56,10 +55,10 @@ module Admin
     end
 
     def delete
-      print "Delete username : "
-      @username = gets.chomp
+      print "Select username id for delete : "
+      id = gets.chomp
 
-      return puts "User is not registered." unless @resource = User.find_by_username(@username)
+      return puts "User is not registered." unless @resource = User.find_by_id(id)
 
       unless @resource.blank?
         @resource.destroy
@@ -99,10 +98,6 @@ module Admin
       end
 
       file.close
-    end
-
-    private
-    def user_params
     end
   end
 end

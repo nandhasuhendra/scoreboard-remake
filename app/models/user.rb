@@ -1,6 +1,9 @@
 class User < ActiveRecord::Base 
   include BCrypt
 
+  has_many  :flag,        dependent: :destroy
+  # has_many  :submission,  dependent: :destroy
+
   validates :username, presence: true, length: { in: 3..200 }, uniqueness: true
 
   has_secure_password
