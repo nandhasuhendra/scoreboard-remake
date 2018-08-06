@@ -27,7 +27,7 @@ module Admin
       print 'Real FLag              : '
       real_flag = gets.chomp
 
-      if @resource = Challenge.create(name: challenge, description: description, real_flag: real_flag, token: ApplicationController.generate_token, score: score, category_id: category)
+      if @resource = Challenge.create(name: challenge, description: description, real_flag: real_flag, token: Application.generate_token, score: score, category_id: category)
         render("admin/challenge/create")
       else
         render("shared/error")
@@ -56,8 +56,8 @@ module Admin
       print "Real Flag                  : "
       real_flag = gets.chomp
 
-      if @resource = Challenge.update(name: challenge, description: description, real_flag: real_flag, score: score, category_id: category)
-        render("admin/challenge/edit")
+      if @resource.update(name: challenge, description: description, real_flag: real_flag, score: score, category_id: category)
+          render("admin/challenge/edit")
       else
         render("shared/error")
       end

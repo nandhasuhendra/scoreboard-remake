@@ -11,9 +11,9 @@ module Admin
 
     def create
       print "Category name : "
-      @category = gets.chomp
+      category = gets.chomp
 
-      if @resource = Category.create(category: @category)
+      if @resource = Category.create(category: category)
         render("admin/category/create")
       else
         render("shared/error")
@@ -24,7 +24,7 @@ module Admin
       print "Select category id for update : "
       id = gets.chomp
 
-      return puts "Category is not added." unless @resource = Category.find_id(id: id)
+      return puts "Category is not added." unless @resource = Category.find_by_id(id)
 
       print "New category                  : "
       category = gets.chomp
@@ -40,7 +40,7 @@ module Admin
       print "Select category id for delete : "
       id = gets.chomp
 
-      return puts "Category is not added." unless @resource = Category.find_by_id(id: id)
+      return puts "Category is not added." unless @resource = Category.find_by_id(id)
 
       unless @resource.blank?
         @resource.destroy

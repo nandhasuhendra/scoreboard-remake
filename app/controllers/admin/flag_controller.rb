@@ -48,7 +48,7 @@ module Admin
       print "flag Id                  : "
       chall = gets.chomp
 
-      if @resource = Flag.update(flag: flag, user_id: team, challenge_id: chall)
+      if @resource.update(flag: flag, user_id: team, challenge_id: chall)
         render("admin/flag/edit")
       else
         render("shared/error")
