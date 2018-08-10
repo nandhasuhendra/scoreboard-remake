@@ -13,7 +13,8 @@ module Admin
       print "Category name : "
       category = gets.chomp
 
-      if @resource = Category.create(category: category)
+      @resource = Category.new(category: category)
+      if @resource.save
         render("admin/category/create")
       else
         render("shared/error")

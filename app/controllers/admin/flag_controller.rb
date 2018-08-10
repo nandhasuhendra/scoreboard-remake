@@ -25,7 +25,8 @@ module Admin
       print "flag Id        : "
       chall = gets.chomp
 
-      if @resource = Flag.create(flag: flag, user_id: team, challenge_id: chall)
+      @resource = Flag.new(flag: flag, user_id: team, challenge_id: chall)
+      if @resource.save
         render("admin/flag/create")
       else
         render("shared/error")
@@ -101,6 +102,8 @@ module Admin
       challs = Challenge.all 
 
       generate_flag(users, challs)
+
+      puts "Generate is done"
     end
   end
 end

@@ -24,7 +24,8 @@ module Admin
       print 'Password Confirmation : '
       confirm = gets.chomp
 
-      if @resource = User.create(username: username, password: password, password_confirmation: confirm, token: Application.generate_token)
+      @resource = User.new(username: username, password: password, password_confirmation: confirm, token: Application.generate_token)
+      if @resource.save
         render("admin/team/create")
       else
         render("shared/error")

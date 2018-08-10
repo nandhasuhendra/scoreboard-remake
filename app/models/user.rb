@@ -2,9 +2,10 @@ class User < ActiveRecord::Base
   include BCrypt
 
   has_many  :flag,        dependent: :destroy
-  # has_many  :submission,  dependent: :destroy
+  has_many  :owner,       dependent: :destroy, class_name: 'Submission', foreign_key: 'owner_id'
+  has_many  :submiter,    dependent: :destroy, class_name: 'Submission', foreign_key: 'submiter_id'
 
-  validates :username, presence: true, length: { in: 3..200 }, uniqueness: true
+  validates :username, presence: true, length: { in: 3..200 }, uniqueness: {scope: :username, case_sensitive: false }
 
   has_secure_password
   validates :password, presence: true, length: { in: 8..200 }, confirmation: true, on: :create
@@ -13,10 +14,6 @@ class User < ActiveRecord::Base
   def password_changed?
     !password.blank?
   end
-
-  # def password=(new_password)
-  #   write_attribute(:password, Password.create(new_password))
-  # end
   
   def self.first_or_create(params = {})
     find = where(username: params[:username]).first

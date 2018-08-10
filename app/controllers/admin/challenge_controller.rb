@@ -27,7 +27,8 @@ module Admin
       print 'Real FLag              : '
       real_flag = gets.chomp
 
-      if @resource = Challenge.create(name: challenge, description: description, real_flag: real_flag, token: Application.generate_token, score: score, category_id: category)
+      @resource = Challenge.new(name: challenge, description: description, real_flag: real_flag, token: Application.generate_token, score: score, category_id: category)
+      if @resource.save
         render("admin/challenge/create")
       else
         render("shared/error")

@@ -4,21 +4,24 @@ require_relative 'team_controller'
 require_relative 'session_controller'
 require_relative 'category_controller'
 require_relative 'challenge_controller'
+require_relative 'submission_controller'
 require_relative 'scoreboard_controller'
 
 module Admin
   class HomeController < ApplicationController
     def initialize
       @allowed_command = %w(
+      submit
+      submissions
+
+      score
+      
       flag
       flag/new
       flag/update
       flag/delete
       flag/batch-flag
       flag/auto-generate
-      flag/submit
-
-      scoreboard
 
       challenge
       challenge/new

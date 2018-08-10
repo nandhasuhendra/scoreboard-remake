@@ -1,0 +1,5 @@
+<% if @resource.is_correct %>
+  [CORRECT!!][<%= @resource.created_at.strftime("%B %e, %Y at %I:%M %p") %>] : <%= @resource.submiter.username %> mencuri flag dari <%= @resource.owner.username %>
+<% else %>
+  [INCORRECT!!][<%= @resource.created_at.strftime("%B %e, %Y at %I:%M %p") %>] : <%= @resource.submiter.username %> Mencoba mencuri flag
+<% end %>

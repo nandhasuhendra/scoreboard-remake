@@ -1,0 +1,9 @@
+<% tables = Terminal::Table.new do |table| %>
+  <% table.headings = ['Id', 'Username'] %>
+  <% @resources.each do |resource| %>
+  	<% next if resource.is_admin %>
+    <% table.add_row [resource.id, resource.username] %>
+  <% end %>
+<% end %>
+
+<%= tables %>
