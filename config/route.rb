@@ -5,6 +5,8 @@ module Config
     'home'                => 'HomeController#menu',
 
     'score'               => 'ScoreboardController#index',
+    'score/freeze'        => 'ScoreboardController#freeze',
+    'score/unfreeze'      => 'ScoreboardController#unfreeze',
 
     'submit'              => 'SubmissionController#create',
     'submissions'         => 'SubmissionController#index',

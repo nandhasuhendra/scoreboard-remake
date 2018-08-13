@@ -15,6 +15,8 @@ module Admin
       submissions
 
       score
+      score/freeze
+      score/unfreeze
       
       flag
       flag/new
