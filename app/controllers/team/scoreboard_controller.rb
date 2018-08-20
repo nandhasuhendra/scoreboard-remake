@@ -9,15 +9,9 @@ module Team
 
         render("admin/scoreboard/index")
       else
-        loop do
-          system("clear")
+        @resources = Score.includes(:user).all.order(total_score: :desc)
 
-          @resources = Score.includes(:user).all.order(total_score: :desc)
-
-          render("admin/scoreboard/index")
-
-          sleep 1
-        end
+        render("admin/scoreboard/index")
       end
     end
   end

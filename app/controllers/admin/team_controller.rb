@@ -8,6 +8,11 @@ module Admin
 
     PLAIN_CREDENTIAL_STORAGE = Dir.pwd + '/storages/plain_credential.txt'
 
+    def info
+      @resources = @@sessions
+      render("admin/team/info")
+    end
+
     def index
       @resources = User.all
 
@@ -15,6 +20,9 @@ module Admin
     end
 
     def create
+      print 'Team Name             : '
+      teamname = gets.chomp
+
       print 'Username              : '
       username = gets.chomp
 
@@ -24,7 +32,7 @@ module Admin
       print 'Password Confirmation : '
       confirm = gets.chomp
 
-      @resource = User.new(username: username, password: password, password_confirmation: confirm, token: Application.generate_token)
+      @resource = User.new(teamname: teamname, username: username, password: password, password_confirmation: confirm, token: Application.generate_token)
       if @resource.save
         render("admin/team/create")
       else
@@ -37,6 +45,9 @@ module Admin
       id = gets.chomp
 
       return puts "User is not registered." unless @resource = User.find_by_id(id)
+      
+      print "New Teamname          : "
+      teamname = gets.chomp
 
       print "New Username          : "
       username = gets.chomp
@@ -48,7 +59,7 @@ module Admin
       print "Password Confirmation : "
       confirm = gets.chomp
 
-      if @resource.update(username: username, password: password, password_confirmation: confirm)
+      if @resource.update(teamname: teamname, username: username, password: password, password_confirmation: confirm)
         render("admin/team/edit")
       else
         render("shared/error")
@@ -99,6 +110,39 @@ module Admin
       end
 
       file.close
+    end
+
+    def import
+      print 'Please, insert the file path for importing data : '
+      path = gets.chomp
+
+      import_file = File.open(Dir.pwd + "/imports/" + path + '.txt', 'r')
+      export_file = File.open(PLAIN_CREDENTIAL_STORAGE, 'a')
+
+      import_file.each_line do |import|
+        password = SecureRandom.hex(PASSWORD_LENGTH)
+
+        import = import.split(':').map(&:strip)
+
+        data = {
+          teamname: import[0],
+          username: import[1],
+          password: password,
+          password_confirmation: password,
+          token: import[2]
+        }
+
+        @resources = User.first_or_create(data)
+
+        render("shared/error") unless @resources.errors.blank?
+
+        export_file.write "Team Name: %s, Username: %s, Password: %s\n" % [data[:teamname], data[:username], data[:password]]
+
+        puts 'Register %s : %s with password : %s | Success' % [data[:teamname], data[:username], data[:password]]
+      end
+
+      import_file.close
+      export_file.close
     end
   end
 end

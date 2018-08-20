@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   has_many  :owner,       dependent: :destroy, class_name: 'Submission', foreign_key: 'owner_id'
   has_many  :submiter,    dependent: :destroy, class_name: 'Submission', foreign_key: 'submiter_id'
 
+  validates :teamname, presence: true, length: { in: 3..200 }, uniqueness: {scope: :teamname, case_sensitive: false }
   validates :username, presence: true, length: { in: 3..200 }, uniqueness: {scope: :username, case_sensitive: false }
 
   has_secure_password

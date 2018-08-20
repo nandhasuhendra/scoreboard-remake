@@ -1,42 +1,59 @@
 require_relative "application_controller"
+require_relative "../../models/play"
 require_relative "../../models/score"
 require_relative "../../models/freeze"
 
 module Admin
   class ScoreboardController < ApplicationController
     def index
-      unless Freeze.all.empty?
-        @resources = Freeze.includes(:user).all.order(total_score: :desc)
+      play = Play.first 
+
+      return freeze unless Freeze.all.empty?
+
+      loop do
+        system("clear")
+
+        if Time.now >= play.end_time - 1.hours
+          set_freeze
+
+          break
+        end
+
+        @resources = Score.includes(:user).all.order(total_score: :desc)
 
         render("admin/scoreboard/index")
-      else
-        loop do
-          system("clear")
 
-          @resources = Score.includes(:user).all.order(total_score: :desc)
-
-          render("admin/scoreboard/index")
-
-          sleep 1
-        end
+        sleep 1
       end
     end
 
     def freeze
-      print "Freeze the scoreboard(Y/n): "
-      freeze = gets.chomp.upcase
+      return puts "Freeze is already empty" if Freeze.all.empty?
 
-      if freeze.eql? "Y"
-        Freeze.delete_all unless Freeze.all.empty?
+      loop do
+        system("clear")
 
-        @resources = Score.includes(:user).all.order(total_score: :desc)
+        @resources = Freeze.includes(:user).all.order(total_score: :desc)
 
-        @resources.each do |score|
-          Freeze.create(
-            total_score: score.total_score,
-            user_id: score.user.id,
-          )
-        end
+        render("admin/scoreboard/index")
+        
+        sleep 1
+      end
+    end
+
+    def set_freeze
+      Freeze.delete_all unless Freeze.all.empty?
+
+      @resources = Score.includes(:user).all.order(total_score: :desc)
+
+      @resources.each do |score|
+
+        data = {
+          total_score: score.total_score,
+          user_id: score.user.id
+        }
+
+        Freeze.create(data)
       end
     end
 

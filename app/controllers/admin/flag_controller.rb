@@ -85,15 +85,15 @@ module Admin
 
         data = {
           flag: datas[0],
-          user: datas[1],
-          challenge: datas[2]
+          user_id: datas[1],
+          challenge_id: datas[2]
         }
 
         @resources = Flag.first_or_create(data)
         
         render("shared/error") unless @resources.errors.blank?
 
-        puts "Flag %s with user %s in %s challenge | Success" % [data[:flag], data[1], data[2]]
+        puts "Flag %s with user %s in %s challenge | Success" % [data[:flag], data[:user_id], data[:challenge_id]]
       end
     end
 
@@ -104,6 +104,32 @@ module Admin
       generate_flag(users, challs)
 
       puts "Generate is done"
+    end
+
+    def import
+      print 'Please, insert the file path for importing data : '
+      path = gets.chomp
+
+      import_file = File.open(Dir.pwd + "/imports/" + path + '.txt', 'r')
+
+      import_file.each_line do |import|
+
+        import = import.split(':').map(&:strip)
+
+        data = {
+          flag: import[0],
+          user_id: import[1],
+          challenge_id: import[2]
+        }
+
+        @resources = Flag.first_or_create(data)
+
+        render("shared/error") unless @resources.errors.blank?
+
+        puts "Flag %s with user %s in %s challenge | Success" % [data[:flag], data[:user_id], data[:challenge_id]]
+      end
+
+      import_file.close
     end
   end
 end

@@ -1,5 +1,5 @@
 class Submission < ActiveRecord::Base
-  validates :submission, uniqueness: { scope: :submiter_id, case_sensitive: false }, if: :is_correct?
+  validates :submission, uniqueness: { scope: :submiter_id }, if: :is_correct?
 
   belongs_to  :owner,     class_name: 'User'
   belongs_to  :submiter,  class_name: 'User'

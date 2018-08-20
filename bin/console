@@ -4,6 +4,7 @@ require_relative '../config/initializers/environment'
 
 require_relative '../app/models/user'
 require_relative '../app/models/flag'
+require_relative '../app/models/play'
 require_relative '../app/models/score'
 require_relative '../app/models/freeze'
 require_relative '../app/models/category'

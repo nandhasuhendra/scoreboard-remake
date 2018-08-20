@@ -1,5 +1,7 @@
 require_relative 'application_controller'
 require_relative '../../models/flag'
+require_relative "../../models/play"
+require_relative '../../models/score'
 require_relative '../../models/submission'
 
 module Admin
@@ -18,10 +20,14 @@ module Admin
     end
 
     def create
+      play = Play.first
+
+      return puts "Time is over!!!" if Time.now >= play.end_time
+
       print "Check flag : "
       flag = gets.chomp
 
-      return puts "FLag is incorrect!!!" unless checking_flag(flag)
+      return puts "Flag is incorrect!!!" unless checking_flag(flag)
 
       unless @submit.valid?
         return puts "Flag in already submitted!!!" 
@@ -33,15 +39,14 @@ module Admin
             user_id: @@sessions.id)
         else
           @owner = Score.first_or_create(user_id: @flag.user.id, total_score: 0)
-          @owner.update(total_score: (@owner.total_score - 10))
+          @owner.update(total_score: (@owner.total_score - play.reduction))
 
           @submiter = Score.first_or_create(user_id: @@sessions.id, total_score: 0)
-          @submiter.update(total_score: (@submiter.total_score + 20))
+          @submiter.update(total_score: (@submiter.total_score + @flag.challenge.score))
         end
       
         return puts "Flag is correct!!!"
       end
-
     end
 
     protected

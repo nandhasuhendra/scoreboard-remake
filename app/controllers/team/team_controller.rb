@@ -4,6 +4,11 @@ require_relative '../../helpers/application'
 
 module Team
   class TeamController < ApplicationController
+    def info
+      @resources = @@sessions
+      render("team/team/info")
+    end
+
     def index
       @resources = User.all
 

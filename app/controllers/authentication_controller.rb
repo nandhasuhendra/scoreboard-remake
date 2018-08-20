@@ -31,8 +31,4 @@ class AuthenticationController < ApplicationController
       Libs::Routing.dispatch('login')
     end
   end
-
-  # def check_password(user, params)
-  #   BCrypt::Password.new(user.password) == params[:password]
-  # end
 end

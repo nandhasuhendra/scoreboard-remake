@@ -1,9 +1,11 @@
 require_relative 'application_controller'
 require_relative 'flag_controller'
+require_relative 'play_controller'
 require_relative 'team_controller'
 require_relative 'session_controller'
 require_relative 'category_controller'
 require_relative 'challenge_controller'
+require_relative 'passphrase_controller'
 require_relative 'submission_controller'
 require_relative 'scoreboard_controller'
 
@@ -11,8 +13,12 @@ module Admin
   class HomeController < ApplicationController
     def initialize
       @allowed_command = %w(
+      info
       submit
+      passphrase
       submissions
+      set-playtime
+      set-reduction
 
       score
       score/freeze
@@ -24,6 +30,7 @@ module Admin
       flag/delete
       flag/batch-flag
       flag/auto-generate
+      flag/import
 
       challenge
       challenge/new
@@ -40,6 +47,7 @@ module Admin
       team/update
       team/delete
       team/batch-register
+      team/import
       )
       @command_completion = @allowed_command
     end

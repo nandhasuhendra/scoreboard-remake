@@ -3,13 +3,18 @@ module Config
     'login'               => 'AuthenticationController#login',
     'logout'              => 'SessionController#logout',
     'home'                => 'HomeController#menu',
-
-    'score'               => 'ScoreboardController#index',
-    'score/freeze'        => 'ScoreboardController#freeze',
-    'score/unfreeze'      => 'ScoreboardController#unfreeze',
-
+    'info'                => 'TeamController#info',
+    'set-playtime'        => 'PlayController#set_play_time',
+    'set-reduction'       => 'PlayController#set_reduction',
+    'scoreboard'          => 'ScoreboardController#index',
+    'passphrase'          => 'PassphraseController#index',
     'submit'              => 'SubmissionController#create',
     'submissions'         => 'SubmissionController#index',
+
+    'score'               => 'ScoreboardController#index',
+    'score/reeze'         => 'ScoreboardController#freeze',
+    'score/set-reeze'     => 'ScoreboardController#set_freeze',
+    'score/unfreeze'      => 'ScoreboardController#unfreeze',
 
     'flag'                => 'FlagController#index',
     'flag/new'            => 'FlagController#create',
@@ -17,8 +22,7 @@ module Config
     'flag/delete'         => 'FlagController#delete',
     'flag/batch-flag'     => 'FlagController#batch_flag',
     'flag/auto-generate'  => 'FlagController#auto_generate',
-
-    'scoreboard'          => 'ScoreboardController#index',
+    'flag/import'         => 'FlagController#import',
 
     'challenge'           => 'ChallengeController#index',
     'challenge/new'       => 'ChallengeController#create',
@@ -34,6 +38,7 @@ module Config
     'team/register'       => 'TeamController#create',
     'team/update'         => 'TeamController#update',
     'team/delete'         => 'TeamController#delete',
-    'team/batch-register' => 'TeamController#batch_insert'
+    'team/batch-register' => 'TeamController#batch_insert',
+    'team/import'         => 'TeamController#import'
   }
 end
