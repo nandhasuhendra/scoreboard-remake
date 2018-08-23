@@ -12,7 +12,7 @@ class AuthenticationController < ApplicationController
     print 'Username : '
     params[:username] = gets.chomp
 
-    print 'Password : '
+    print "Password : \e[0;8m"
     params[:password] = gets.chomp
 
     user = User.find_by_username(params[:username])
@@ -20,10 +20,11 @@ class AuthenticationController < ApplicationController
     if user and user.authenticate(params[:password])
       set_session(user)
 
+      puts "\e[0mLogin success"
       # Libs::Routing.params({})
       Libs::Routing.dispatch('home', ((user.is_admin) ? 'admin' : 'team'))
     else
-      puts 'Failed'
+      puts "\e[0mFailed"
 
       sleep 2
 
