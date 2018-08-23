@@ -3,10 +3,8 @@ class CreateUsers < ActiveRecord::Migration[5.0]
     create_table :users do |t|
       t.text    :teamname,        unique: true
       t.text    :username,        unique: true
-      t.integer :active,          default: 1
       t.text    :token
       t.boolean :is_admin,        default: false
-      t.boolean :is_deleted,      default: false
       t.text    :password_digest
 
       t.timestamps

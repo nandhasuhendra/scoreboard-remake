@@ -1,6 +1,0 @@
-SlashRootCTF{a21392aa278ad9f810a3a504c852d630}:2:1
-SlashRootCTF{5a84189c9179d1b568c0533a5a8619fd}:3:1
-SlashRootCTF{17921505c141bc012b4afe24a8b319a9}:2:2
-SlashRootCTF{9d881d4bcf7dc2a4c8b5cab5b2a6773d}:2:4
-SlashRootCTF{b95caaae9e16b6a2ff36c229fb82fafc}:4:4
-SlashRootCTF{cc837fccf3d86cc621aef8536ea9003c}:5:3
