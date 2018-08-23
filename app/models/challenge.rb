@@ -8,4 +8,12 @@ class Challenge < ActiveRecord::Base
   validates :description, presence: true, length: { minimum: 10 }
   validates :score, presence: true, numericality: true
   validates :real_flag, uniqueness: true, allow_blank: true
+
+  def self.first_or_create(params = {})
+    find = where(name: params[:name]).first
+
+    return find unless find.nil?
+
+    create(params)
+  end
 end

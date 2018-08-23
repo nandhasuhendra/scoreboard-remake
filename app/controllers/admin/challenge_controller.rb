@@ -78,5 +78,35 @@ module Admin
         puts "Challenge is not registered"
       end
     end
+
+    def import
+      print 'Please, insert the file path for importing data : '
+      path = gets.chomp
+
+      import_file = File.open(Dir.pwd + "/imports/" + path + '.txt', 'r')
+
+      import_file.each_line do |import|
+        token = ApplicationController.generate_token
+
+        import = import.split(':').map(&:strip)
+
+        data = {
+          category: import[0],
+          name: import[1],
+          description: import[2],
+          real_flag: nil,
+          token: token,
+          score: import[3]
+        }
+
+        @resources = Challenge.first_or_create(data)
+
+        render("shared/error") unless @resources.errors.blank?
+
+        puts 'Add challenge %s | Success' % [data[:name]]
+      end
+
+      import_file.close
+    end
   end
 end
