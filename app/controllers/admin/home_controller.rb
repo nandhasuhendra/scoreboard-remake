@@ -23,6 +23,7 @@ module Admin
       score
       score/freeze
       score/unfreeze
+      score/set-freeze
       
       flag
       flag/new

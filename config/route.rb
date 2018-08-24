@@ -13,8 +13,8 @@ module Config
 
     'score'               => 'ScoreboardController#index',
     'score/reeze'         => 'ScoreboardController#freeze',
-    'score/set-reeze'     => 'ScoreboardController#set_freeze',
     'score/unfreeze'      => 'ScoreboardController#unfreeze',
+    'score/set-freeze'    => 'ScoreboardController#set_freeze',
 
     'flag'                => 'FlagController#index',
     'flag/new'            => 'FlagController#create',

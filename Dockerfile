@@ -12,8 +12,9 @@ WORKDIR /home/app
 
 RUN gem install bundler
 RUN bundle install
-RUN rake db:migrate && \
-      rake db:seed
+
+# RUN rake db:migrate && \
+#       rake db:seed
 
 RUN chmod +x start.sh
 
