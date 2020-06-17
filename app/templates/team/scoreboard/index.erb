@@ -1,0 +1,11 @@
+<% tables = Terminal::Table.new do |table| %>
+  <% i = 0 %>
+  <% table.headings = ['No', 'Team', 'Score'] %>
+  <% @resources.each do |resource| %>
+    <% next if resouce.is_admin %>
+    <% table.add_row [i += 1, resource.user.username, resource.total_score] %>
+  <% end %>
+<% end %>
+
+<%= tables %>
+

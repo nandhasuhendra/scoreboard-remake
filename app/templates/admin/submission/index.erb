@@ -1,0 +1,5 @@
+<% if @resource.is_correct %>
+  [CORRECT!!]   [<%= @resource.created_at %>] : <%= @resource.submiter.teamname %> mencuri flag dari <%= @resource.owner.teamname %>
+<% else %>
+  [INCORRECT!!] [<%= @resource.created_at %>] : <%= @resource.submiter.teamname %> Mencoba mencuri flag
+<% end %>
